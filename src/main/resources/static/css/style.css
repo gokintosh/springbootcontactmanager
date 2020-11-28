@@ -1,10 +1,16 @@
 body{
-    background-image: linear-gradient(to right,#6247aa,#dec9e9);
+
+    background-image: linear-gradient(to right,#6247aa,#543864);
 }
+
+
 
 
 .bg-primary{
     background: #3c096c !important;
+}
+.bg-secondary{
+    background: #543864 !important;
 }
 
 .banner{
@@ -14,4 +20,10 @@ body{
     background-size: cover;
     color: white;
 
+}
+
+.my-card{
+    color: aliceblue;
+    padding: 20px;
+    background: #202040;
 }

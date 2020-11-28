@@ -5,6 +5,61 @@
     <title>this is signup page</title>
 </head>
 <body>
-<section><h1>This is Signup page</h1></section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+                <div class="my-card mt-3">
+                    <h1 class="text-center">Create an account   <img style="width: 50px;height: 50px;" th:src="@{/img/sign-up.png}" alt=""></h1>
+
+
+                    <form action="" th:action="@{/do_register}" method="post">
+
+<!--                        name field-->
+                        <div class="form-group">
+                            <label for="name_fied">Name</label>
+                            <input type="text" class="form-control" id="name_fied" aria-describedby="name_field" placeholder="Enter your name" required>
+
+
+                        </div>
+
+                        <!--                        email field-->
+                        <div class="form-group">
+                            <label for="name_fied">Email</label>
+                            <input type="email" class="form-control" id="email_field" aria-describedby="email_field" placeholder="Enter your email" required>
+
+
+                        </div>
+
+                        <!--                        password field-->
+                        <div class="form-group">
+                            <label for="password_field">Password</label>
+                            <input type="password" class="form-control" id="password_field" aria-describedby="password_field" required>
+
+
+                        </div>
+
+<!--                        user about field-->
+                        <div class="form-group">
+
+                            <textarea placeholder="Enter something about yourself" rows="8" class="form-control"></textarea>
+                        </div>
+
+                        <div class="container text-center">
+                            <button type="submit" class="btn bg-primary text-white btn-block">Submit</button>
+                            <button type="reset" class="btn bg-secondary text-white btn-block">Reset</button>
+                        </div>
+
+
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
