@@ -5,12 +5,14 @@ import com.gokul.contactmanager.dao.UserRepository;
 import com.gokul.contactmanager.enities.User;
 import com.gokul.contactmanager.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 
 @Controller
@@ -42,30 +44,36 @@ public class HomeController {
 
     //this handler for regitering user
     @RequestMapping(value = "/do_register",method= RequestMethod.POST)
-    public String registerUser(@ModelAttribute("user") User user, @RequestParam(value="agreement",defaultValue = "false") boolean agreement, Model model, HttpSession session){
+    public Object registerUser(@Valid @ModelAttribute("user") User user,BindingResult result1, @RequestParam(value="agreement",defaultValue = "false") boolean agreement, Model model, HttpSession session){
 
         try{
             if(!agreement){
 
                 throw new Exception("please agree terms and conditions!");
             }
-            user.setRole("ROLE_USER");
-            user.setEnabled(true);
 
-            System.out.println(agreement);
-            System.out.println(user);
-            System.out.println(model);
-            User result=this.userRepository.save(user);
-            System.out.println(result);
+            else if(result1.hasErrors()){
+                System.out.println(result1.toString());
+                model.addAttribute("user",user);
+                return "signup";
+            }
+            else {
+                user.setRole("ROLE_USER");
+                user.setEnabled(true);
 
-            model.addAttribute("user",new User());
-            session.setAttribute("message",new Message("registration successful","alert-success"));
-            return "signup";
+
+                User result = this.userRepository.save(user);
+                System.out.println(result);
+
+                model.addAttribute("user", user);
+                session.setAttribute("message", new Message("registration successful", "alert-success"));
+                return "signup";
+            }
 
         }catch (Exception e){
             e.printStackTrace();
             model.addAttribute("user",user);
-            session.setAttribute("message",new Message("Server error","alert-danger"));
+            session.setAttribute("message",new Message("something went wrong :"+e.getMessage(),"alert-danger"));
             return "signup";
         }
 

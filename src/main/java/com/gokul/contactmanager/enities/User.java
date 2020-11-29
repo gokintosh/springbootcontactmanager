@@ -2,6 +2,8 @@ package com.gokul.contactmanager.enities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @NotBlank(message = "name cannot left blank")
+    @Size(min = 2,max = 20,message = "name can only contain 2-20 characters")
     private String name;
+
     @Column(unique = true)
     private String email;
     private String password;
