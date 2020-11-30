@@ -86,4 +86,11 @@ public class HomeController {
 
     }
 
+
+//    handler for custom login
+    @GetMapping("/login")
+    public String customLogin(Model model){
+        model.addAttribute("title","Login page");
+        return "login";
+    }
 }
